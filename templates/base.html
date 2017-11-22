@@ -1,0 +1,116 @@
+﻿
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+    <title>Springfield</title>
+    {% load static %}
+    <link rel="shortcut icon" href="{% static '..\static\logo.jpg' %} " type="image/jpg" style="width:100%"/>
+	<!--<link rel="stylesheet" type="text/css"  href="{% static '..\static\index.css' %}"/>-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
+<body>
+<script>
+
+	function validaCmp(){
+
+		 var user = document.getElementById("id_username").value;
+		 var pass = document.getElementById("id_password").value;
+
+		 if(user == "" || user == null){
+
+			 alert("Usuario invalido ! ")
+
+		 }
+
+		 if(pass == "" || pass == null){
+
+			 alert("Senha invalida ! ")
+
+		 }
+	}
+
+
+</script>
+<style>
+body { margin: 0; }
+#acesso { display: flex; }
+#acesso input { margin: 5px; padding: 10px 20px; border: 2px solid black; border-radius: 5px; }
+#login { font-size: 18px; }
+#botao { background-color: #FFD700; padding: 0 10px; border: 2px solid black; border-radius: 5px; }
+#botao:hover { background-color: #FFD700; border: 2px solid white; color: white; }
+nav.menu ul { width: 100%; list-style: none; display: inline; position: fixed; top:-2px; background-color: #FFD700; text-align: center; }
+nav.menu li { font-size:16px; display:inline-block; padding: 15px; transition:0.5s; font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif; }
+nav.menu a { text-decoration:none; color:black; }
+nav.menu li:hover { background-color:#0c7dbd; }
+footer { clear:both; background-color:#FFD700; font-size: 100%; width: 105%; margin-left: 0%; margin-right: -10%; margin-bottom: -7%; margin-top: -2%; display: flex; justify-content: center; }
+footer div { clear:both; text-align: left; margin-left:40px; margin-right:60px; }
+</style>
+<nav class="menu">
+	<ul style="text-align: center">
+		<a href="index.html"><li style="font-size:17px">O Springfield</li></a>
+		<a href="cursos.html"><li style="font-size:17px">Cursos</li></a>
+		<a href="eventos.html"><li style="font-size:17px">Eventos</li></a>
+		<a href="blog.html"><li style="font-size:17px">Blog</li></a>
+		<a href="contato.html"><li style="font-size:17px">Contato</li></a>
+		{% if not user.is_authenticated %}
+		<form method="POST" id="acesso">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" onclick="validaCmp()" value="ACESSAR AO SITE" id="botao"/>	
+		</form>		
+	{% else %}
+		Olá, {{user}}!
+		<a href="sair/">Clique para Sair</a>
+	{% endif %}
+	</ul>
+</nav>
+<br/><br/><br/>
+</center>
+{% block conteudo %}
+{% endblock %}
+
+<footer id="baixo">
+	<div id="sobre" class="col-xs-2 col-sm-2 col-md-4 col-lg-2">
+		<p align="justify">
+		<h3>SOBRE</h3><br/>
+		<p align="justify">
+		Texto sobre a instituição.</p>
+	</div>
+
+	<div id="cursos">
+		<p align="justify">
+		<h3>CURSOS</h3><br/>
+		Análise e Desenvolvimento de Sistemas<br/>
+		Graduação<br/>
+		Business Intelligence & Big Data<br/>
+		Pós-Graduação<br/>
+		Sistemas da Informação<br/>
+		Graduação<br/>
+		Gestão de Projetos</h4>
+		Pós-Graduação<br/>
+		Redes de Computadores<br/>
+		Graduação<br/>
+	</div>
+
+	<div id="atendimento">
+		<p align="justify">
+		<h3>ATENDIMENTO</h3><br/>
+		Secretaria da Graduação<br/>
+		De segunda à sexta – das 09h00 às 21h00<br/>
+		Telefone - (11) 1122-3344<br/><br/>
+		Secretaria de Pós-graduação<br/>
+		De segunda à sexta – das 13h00 às 21h00<br/>
+		Sábado – das 09h00 às 13h00<br/>
+		Telefone - (11) 5566-7788<br/><br/>
+		Ouvidoria<br/>
+		De segunda à sexta – das 09h00 às 18h00<br/>
+		Telefone - (11) 7788-9900<br/>
+		<br/><br/><br/><br/>
+	</div>
+</footer>
+</body>
+</html>
+
